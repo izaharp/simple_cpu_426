@@ -22,7 +22,7 @@ begin
 		case opcode is
 			when "00" => y <= resize(a,5) + resize(b,5);
 			when "01" => y <= resize(a,5) - resize(b,5);
-			-- when "10" => y <= not resize(a, 5); can be obtained by designing instructions to use the nand gate instead
+			-- when "10" => y <= not resize(a, 5); can maybe be obtained by designing instructions to use the nand gate instead
 			when "10" => y <= resize(a,5) nand resize(b,5);
 			when others => y <= (others => 'Z');
 		end case;
