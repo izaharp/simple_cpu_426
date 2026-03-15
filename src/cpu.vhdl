@@ -12,7 +12,7 @@ entity alu is
 	);
 end entity;
 
--- Result |MSB|N|Z|C|R|R|R|R.LSB|
+-- Result |MSB.Z|||||||LSB|
 architecture behaviour of alu is
 	-- Signal declarations
 	signal y : unsigned(4 downto 0);
@@ -27,8 +27,8 @@ begin
 			when others => y <= (others => 'Z');
 		end case;
 	end process;
-	-- |CARRY|R|R|R|R.LSB|
-	result(4 downto 0) <= std_logic_vector(y);
-	-- bit number six is the zero flag that can be used for branching:
-	result(5) <= '1' when y = "00000" else '0';
+	-- ||||||	
+	-- result(4 downto 0) <= std_logic_vector(y); need to redesign this because of the result sizes
+	-- bit number seven is the zero flag that can be used for branching:
+	result(7) <= '1' when y = "00000" else '0';
 end architecture;
