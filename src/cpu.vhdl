@@ -27,8 +27,8 @@ begin
 			when others => y <= (others => 'Z');
 		end case;
 	end process;
-	-- ||||||	Possible flags: Overflow and Carry flags
-	-- result(4 downto 0) <= std_logic_vector(y); need to redesign this because of the result sizes
+	-- ||||||	Possible flags: Overflow and Carry flags, Negative flag to handle subtractions result
+	-- result(4 downto 0) <= std_logic_vector(y); might need to redesign this because of the result sizes if using signed interval instead
 	-- bit number seven is the zero flag that can be used for branching:
 	result(7) <= '1' when y = "00000" else '0';
 end architecture;
