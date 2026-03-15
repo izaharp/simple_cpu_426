@@ -22,12 +22,12 @@ begin
 		case opcode is
 			when "00" => y <= resize(a,5) + resize(b,5);
 			when "01" => y <= resize(a,5) - resize(b,5);
-			when "10" => y <= not resize(a, 5);
-			when "11" => y <= resize(a,5) nand resize(b,5);
+			-- when "10" => y <= not resize(a, 5); can be obtained by designing instructions to use the nand gate instead
+			when "10" => y <= resize(a,5) nand resize(b,5);
 			when others => y <= (others => 'Z');
 		end case;
 	end process;
-	-- ||||||	
+	-- ||||||	Possible flags: Overflow and Carry flags
 	-- result(4 downto 0) <= std_logic_vector(y); need to redesign this because of the result sizes
 	-- bit number seven is the zero flag that can be used for branching:
 	result(7) <= '1' when y = "00000" else '0';
