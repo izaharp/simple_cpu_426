@@ -15,13 +15,13 @@ end entity;
 -- Result |MSB.Z|||||||LSB|
 architecture behaviour of alu is
 	-- Signal declarations
-	signal y : unsigned(4 downto 0);
+	signal y : unsigned(4 downto 0); -- ?
 begin
 	process(a,b,opcode)
 	begin
 		case opcode is
 			when "00" => y <= resize(a,5) + resize(b,5);
-			when "01" => y <= resize(a,5) - resize(b,5);
+			when "01" => y <= resize(a,5) - resize(b,5); -- negative result is out of range ?
 			-- when "10" => y <= not resize(a, 5); can maybe be obtained by designing instructions to use the nand gate instead
 			when "10" => y <= resize(a,5) nand resize(b,5);
 			when others => y <= (others => 'Z');
@@ -30,5 +30,9 @@ begin
 	-- ||||||	Possible flags: Overflow and Carry flags, Negative flag to handle subtractions result
 	-- result(4 downto 0) <= std_logic_vector(y); might need to redesign this because of the result sizes if using signed interval instead
 	-- bit number seven is the zero flag that can be used for branching:
+	-- temporary
+	result(4 downto 0) <= std_logic_vector(y);
 	result(7) <= '1' when y = "00000" else '0';
+	
+	
 end architecture;
